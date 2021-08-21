@@ -4,9 +4,7 @@
   "description": "react calendar component implementation",
   "main": "index.js",
   "scripts": {
-    "webpack": "webpack",
-    "start": "webpack && webpack serve",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack && webpack serve"
   },
   "keywords": [
     "react",
