@@ -1,13 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import styles from  './index.css'
+import React from "react";
+import ReactDOM from "react-dom";
+import CalendarWrapper from "./componentWrapers/calendarWrapper";
 
-const HelloWorld = () => {
+const App = () => {
     return (
-        <h1 className={styles.container}>
-            Hello World
-        </h1>
+        <CalendarWrapper />
     );
-}
+};
 
-ReactDOM.render(<HelloWorld />, document.getElementById("mount"));
+ReactDOM.render(<App />, document.getElementById("mount"));

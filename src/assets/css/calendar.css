@@ -1,0 +1,118 @@
+.calendarContainer {
+    width: 80%;
+    margin: auto;
+    background: #fff;
+    border: 1px solid #eee;
+}
+
+.headerWrapper {
+    width: 100%;
+    padding: 1.75em 0;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.headerWrapper div {
+    flex-grow: 1;
+}
+
+.headerWrapper img {
+    cursor: pointer;
+}
+
+.leftSection {
+    justify-content: flex-end;
+    text-align: left;
+}
+
+.leftArrow {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.middleSection {
+    text-align: center;
+    justify-content: center;
+}
+
+.rightSection {
+    justify-content: flex-end;
+    text-align: right;
+}
+
+.daysSection {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 70%;
+    padding: 0.75em 0;
+}
+
+.singleDay {
+    flex-grow: 1;
+    flex-basis: 0;
+    max-width: 100%;
+    justify-content: center;
+    text-align: center;
+}
+
+.daysWrapper {
+    flex-grow: 1;
+    flex-basis: 0;
+    max-width: 100%;
+    position: relative;
+    height: 5em;
+    border: 1px solid #eee;
+    overflow: hidden;
+    background: #fff;
+    transition: 0.25s ease-out;
+    display: flex;
+    justify-content: center;
+}
+
+.bg {
+    font-weight: 700;
+    line-height: 1;
+    color: #1a8fff;
+    opacity: 0;
+    font-size: 8em;
+    position: absolute;
+    top: -0.2em;
+    right: -0.05em;
+    transition: 0.25s ease-out;
+    letter-spacing: -0.07em;
+}
+
+.mainSection {
+    font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-size: 1em;
+    font-weight: 300;
+    line-height: 1.5;
+    color: #777;
+    background: #f9f9f9;
+    position: relative;
+}
+
+.singleRow {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.number {
+    font-size: 82.5%;
+}
+
+.notCurrentMonth {
+    color: black;
+    pointer-events: none;
+    cursor: not-allowed;
+    background-color: #c5c5c5;
+}
