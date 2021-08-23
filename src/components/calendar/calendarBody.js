@@ -1,15 +1,21 @@
-import React, { useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import Styles from "../../assets/css/calendar.css";
 import SingleDay from "./singleDay";
-import {
-    addDays,
-    isMonthSame,
-    getEndOfWeek,
-    getStartOfWeek,
-} from "../../utils/constant";
+import { addDays, getEndOfWeek, getStartOfWeek } from "../../utils/constant";
 
 const CalendarBody = (props) => {
+    const [events, setEvents] = useState(
+        localStorage.getItem("events")
+            ? JSON.parse(localStorage.getItem("events"))
+            : []
+    );
     const { currentMonth } = props;
+
+    const addEvent = (eventData) => {
+        const data = [...events, eventData];
+        localStorage.setItem("events", JSON.stringify(data));
+        setEvents(data);
+    };
 
     const renderBody = useCallback(() => {
         const monthStart = new Date(
@@ -29,7 +35,14 @@ const CalendarBody = (props) => {
         let day = startDate;
         while (day <= endDate) {
             for (let i = 0; i < 7; i++) {
-                days.push(<SingleDay day={day} monthStart={monthStart} />);
+                days.push(
+                    <SingleDay
+                        day={day}
+                        monthStart={monthStart}
+                        addEvent={(eventData) => addEvent(eventData)}
+                        events={events.filter(item => new Date(item.date).getTime() == new Date(day).getTime())}
+                    />
+                );
                 day = addDays(day, 1);
             }
             rows.push(
@@ -42,7 +55,11 @@ const CalendarBody = (props) => {
         return rows;
     });
 
-    return <div className={Styles.mainSection}>{renderBody()}</div>;
+    return (
+        <React.Fragment>
+            <div className={Styles.mainSection}>{renderBody()}</div>
+        </React.Fragment>
+    );
 };
 
 export default React.memo(CalendarBody);

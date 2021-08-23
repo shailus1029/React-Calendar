@@ -1,8 +1,10 @@
 .calendarContainer {
     width: 80%;
-    margin: auto;
-    background: #fff;
+    margin: 2% auto;
+    background: #18a650;
     border: 1px solid #eee;
+    color: #fff;
+    font-family:Verdana, Geneva, Tahoma, sans-serif
 }
 
 .headerWrapper {
@@ -26,7 +28,13 @@
     text-align: left;
 }
 
-.leftArrow {
+.leftArrow, .rightArrow {
+    height: 20px;
+    width: 20px;
+    padding: 5px;
+}
+
+.rightArrow {
     -webkit-transform: rotate(180deg);
     -moz-transform: rotate(180deg);
     transform: rotate(180deg);
@@ -50,6 +58,7 @@
     font-weight: 400;
     font-size: 70%;
     padding: 0.75em 0;
+    letter-spacing: 1px;
 }
 
 .singleDay {
@@ -65,13 +74,14 @@
     flex-basis: 0;
     max-width: 100%;
     position: relative;
-    height: 5em;
+    height: 5.5em;
     border: 1px solid #eee;
     overflow: hidden;
     background: #fff;
     transition: 0.25s ease-out;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .bg {
@@ -115,4 +125,22 @@
     pointer-events: none;
     cursor: not-allowed;
     background-color: #c5c5c5;
+}
+
+.eventTitle {
+    width: 95%;
+    font-size: 10px;
+    color: #fff;
+    background-color: #50b1b1;
+    border-radius: 2px;
+    padding-left: 5px;
+    margin-bottom: 3px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 425px) {
+    .calendarContainer {
+        width: 95%;
+        margin: 15% auto;
+    }
 }

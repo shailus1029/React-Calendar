@@ -1,6 +1,6 @@
 import React from "react";
 import Styles from "../../assets/css/calendar.css";
-import ArrowImage from "../../assets/images/arrow.svg";
+import ArrowImage from "../../assets/images/left-arrow.png";
 import { getCurrentMonth } from "../../utils/constant";
 
 const CalendarHeader = (props) => {
