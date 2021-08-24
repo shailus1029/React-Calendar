@@ -135,7 +135,7 @@
 
 .eventTitle {
     width: 95%;
-    font-size: 10px;
+    font-size: 9px;
     color: #fff;
     background-color: #50b1b1;
     border-radius: 2px;
@@ -144,9 +144,18 @@
     cursor: pointer;
 }
 
+@media screen and (max-width: 768px) {
+    .eventTitle {
+        font-size: 8px;
+    }
+}
+
 @media screen and (max-width: 425px) {
     .calendarContainer {
         width: 95%;
         margin: 15% auto;
+    }
+    .eventTitle {
+        font-size: 6px;
     }
 }

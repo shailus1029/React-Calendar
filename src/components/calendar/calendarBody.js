@@ -37,6 +37,7 @@ const CalendarBody = (props) => {
             for (let i = 0; i < 7; i++) {
                 days.push(
                     <SingleDay
+                        key={new Date().getMilliseconds() + parseInt(i)}
                         day={day}
                         monthStart={monthStart}
                         addEvent={(eventData) => addEvent(eventData)}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Styles from "../../assets/css/event.css";
-import closeIcon from "../../assets/images/close.svg";
 import TimeDropdown from "./timerDropDown";
+import ModalHeader from './modalHeader';
 
 const types = ["Event", "Remainder"];
 const defaulTimeList = [
@@ -85,17 +85,10 @@ const AddEvent = (props) => {
 
     return (
         <div id="addEvent" className={Styles.popup1}>
-            <div className={Styles.closeDiv}>
-                <img
-                    src={closeIcon}
-                    alt='closeIcon'
-                    className={Styles.closeIcon}
-                    onClick={props.closeAddEvent}
-                />
-            </div>
-            <div className={`${Styles.eventTiming} ${Styles.eventDate}`}>
-                {new Date(props.date).toDateString()}
-            </div>
+            <ModalHeader
+                closeAddEvent={props.closeAddEvent}
+                headerTitle={new Date(props.date).toDateString()}
+            />
             <form onSubmit={handleSubmit}>
                 <div className={Styles.eventForm}>
                     <div className={Styles.from}>

@@ -1,18 +1,14 @@
 import React from "react";
 import Styles from "../../assets/css/event.css";
-import closeIcon from "../../assets/images/close.svg";
+import ModalHeader from './modalHeader';
 
 const EventDetails = (props) => {
     return (
         <div id='eventDetails' className={Styles.eventDetailsPopUp}>
-            <div className={Styles.closeDiv}>
-                <img
-                    src={closeIcon}
-                    alt='closeIcon'
-                    className={Styles.closeIcon}
-                    onClick={props.closeAddEvent}
-                />
-            </div>
+            <ModalHeader
+                closeAddEvent={props.closeAddEvent}
+                headerTitle="Events Details"
+            />
             <div>
                 <div className={Styles.eventTitle}>
                     {props.eventDetails.title.charAt(0).toUpperCase() + props.eventDetails.title.slice(1)}

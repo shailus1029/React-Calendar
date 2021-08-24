@@ -35,7 +35,6 @@
 }
 
 .closeDiv {
-    top: 15px;
     right: 12px;
     position: absolute;
 }
@@ -214,12 +213,14 @@
 }
 
 .eventDate {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 600;
+    margin-bottom: 10px;
 }
 
 button:disabled {
     cursor: not-allowed;
+    background-color:grey;
     pointer-events: all !important;
 }
 
@@ -227,6 +228,14 @@ button:disabled {
     font-size: 11px;
     margin-top: 10px;
     color: mediumvioletred;
+}
+
+.allEvents {
+    margin-top: 10px;
+}
+
+.titleWrapper {
+    margin-top: -20px;
 }
 
 @media screen and (max-width: 400px) {
