@@ -8,6 +8,17 @@ import { addMonths, subMonths } from "../utils/constant";
 
 const CalendarWrapper = () => {
     const [currentMonth, setCurrentMonth] = useState(new Date());
+    const [events, setEvents] = useState(
+        localStorage.getItem("events")
+            ? JSON.parse(localStorage.getItem("events"))
+            : []
+    );
+
+    const addEvent = (eventData) => {
+        const data = [...events, eventData];
+        localStorage.setItem("events", JSON.stringify(data));
+        setEvents(data);
+    };
 
     const handleNextMonth = () => {
         setCurrentMonth(addMonths(currentMonth, 1));
@@ -25,10 +36,10 @@ const CalendarWrapper = () => {
                     nextMonth={handleNextMonth}
                     prevMonth={handlePrevMonth}
                 />
-                <SearchEvents />
+                <SearchEvents events={events} currentMonth={currentMonth} />
             </div>
             <CalendarWeekDays />
-            <CalendarBody currentMonth={currentMonth} />
+            <CalendarBody currentMonth={currentMonth} addEvent={addEvent} events={events} />
         </div>
     );
 };

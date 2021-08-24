@@ -1,17 +1,13 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import Styles from "../../assets/css/searchEvents.css";
-import { fuzzySearch } from "../../utils/constant";
+import { fuzzySearch, isMonthSame } from "../../utils/constant";
 import Loader from "../loader";
 const EventDetails = React.lazy(() => import("./eventDetails"));
 
 const SearchEvents = (props) => {
     const [searchText, setSearchText] = useState("");
     const [suggestions, setSuggesstions] = useState([]);
-    const [events, setEvents] = useState(
-        localStorage.getItem("events")
-            ? JSON.parse(localStorage.getItem("events"))
-            : []
-    );
+    const [events, setEvents] = useState(props.events);
     const [selectedEvent, setSelectedEvent] = useState({});
     const [showEventDetails, setEventDetailsFlag] = useState(false);
 
@@ -25,6 +21,10 @@ const SearchEvents = (props) => {
         }
     };
 
+    useEffect(() => {
+        setEvents(props.events)
+    }, [props.events])
+
     const handleClose = () => {
         setSearchText("");
         setEventDetailsFlag(false);
@@ -34,7 +34,7 @@ const SearchEvents = (props) => {
         const value = e.target.value;
         let suggestions = [];
         if (value.length > 0) {
-            suggestions = events.filter((item) => {
+            suggestions = events.filter(item => isMonthSame(new Date(props.currentMonth), new Date(item.date)) ).filter((item) => {
                 const result = fuzzySearch(item.title, value);
                 return result ? true : false;
             });

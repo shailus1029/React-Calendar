@@ -4,18 +4,7 @@ import SingleDay from "./singleDay";
 import { addDays, getEndOfWeek, getStartOfWeek } from "../../utils/constant";
 
 const CalendarBody = (props) => {
-    const [events, setEvents] = useState(
-        localStorage.getItem("events")
-            ? JSON.parse(localStorage.getItem("events"))
-            : []
-    );
     const { currentMonth } = props;
-
-    const addEvent = (eventData) => {
-        const data = [...events, eventData];
-        localStorage.setItem("events", JSON.stringify(data));
-        setEvents(data);
-    };
 
     const renderBody = useCallback(() => {
         const monthStart = new Date(
@@ -40,8 +29,8 @@ const CalendarBody = (props) => {
                         key={new Date().getMilliseconds() + parseInt(i)}
                         day={day}
                         monthStart={monthStart}
-                        addEvent={(eventData) => addEvent(eventData)}
-                        events={events.filter(item => new Date(item.date).getTime() == new Date(day).getTime())}
+                        addEvent={(eventData) => props.addEvent(eventData)}
+                        events={props.events.filter(item => new Date(item.date).getTime() == new Date(day).getTime())}
                     />
                 );
                 day = addDays(day, 1);
