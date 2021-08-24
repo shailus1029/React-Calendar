@@ -1,9 +1,11 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, Suspense } from "react";
 import Styles from "../../assets/css/calendar.css";
 import { isMonthSame } from "../../utils/constant";
-import AddEvent from "../events/addEvent";
-import EventDetails from "../events/eventDetails";
-import AllEvents from '../events/allEvents';
+import Loader from '../loader';
+const AddEvent = React.lazy(() => import('../events/addEvent'));
+const EventDetails = React.lazy(() => import('../events/eventDetails'));
+const AllEvents = React.lazy(() => import('../events/allEvents'));
+
 
 const SingleDay = (props) => {
     const [selectedEvent,setSelectedEvent] = useState({});
@@ -84,20 +86,29 @@ const SingleDay = (props) => {
                 ) : null}
             </div>
             {showAddEvent && (
-                <AddEvent
-                    date={props.day}
-                    addEvent={props.addEvent}
-                    closeAddEvent={() => setAddEventFlag(false)}
-                />
+                <Suspense fallback={<Loader />}>
+                    <AddEvent
+                        date={props.day}
+                        addEvent={props.addEvent}
+                        closeAddEvent={() => setAddEventFlag(false)}
+                    />
+                </Suspense>
             )}
             {showEventDetails && (
-                <EventDetails
-                    eventDetails={selectedEvent}
-                    closeAddEvent={() => setEventDetailsFlag(false)}
-                />
+                <Suspense fallback={<Loader />}>
+                    <EventDetails
+                        eventDetails={selectedEvent}
+                        closeAddEvent={() => setEventDetailsFlag(false)}
+                    />
+                </Suspense>
             )}
             {showAllEvent && props.events && props.events.length > 3 && (
-                <AllEvents events={props.events} closeAddEvent={() => setAllEventFlag(false)} />
+                <Suspense fallback={<Loader />}>
+                    <AllEvents
+                        events={props.events}
+                        closeAddEvent={() => setAllEventFlag(false)}
+                    />
+                </Suspense>
             )}
         </React.Fragment>
     );

@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import Styles from "../../assets/css/searchEvents.css";
 import { fuzzySearch } from "../../utils/constant";
-import EventDetails from "./eventDetails";
+import Loader from "../loader";
+const EventDetails = React.lazy(() => import("./eventDetails"));
 
 const SearchEvents = (props) => {
     const [searchText, setSearchText] = useState("");
@@ -14,9 +15,9 @@ const SearchEvents = (props) => {
     const [selectedEvent, setSelectedEvent] = useState({});
     const [showEventDetails, setEventDetailsFlag] = useState(false);
 
-    const handleSelectedEvent1 = (item) => e => {
+    const handleSelectedEvent1 = (item) => (e) => {
         const isEventDetailsPopUpOpen = document.getElementById("eventDetails");
-        if(!isEventDetailsPopUpOpen) {
+        if (!isEventDetailsPopUpOpen) {
             setSuggesstions([]);
             setSelectedEvent(item);
             setSearchText(item.title);
@@ -25,9 +26,9 @@ const SearchEvents = (props) => {
     };
 
     const handleClose = () => {
-        setSearchText('');
-        setEventDetailsFlag(false)
-    }
+        setSearchText("");
+        setEventDetailsFlag(false);
+    };
 
     const handleAutoComplete = (e) => {
         const value = e.target.value;
@@ -77,10 +78,12 @@ const SearchEvents = (props) => {
                 </div>
             </div>
             {showEventDetails && (
-                <EventDetails
-                    eventDetails={selectedEvent}
-                    closeAddEvent={handleClose}
-                />
+                <Suspense fallback={<Loader />}>
+                    <EventDetails
+                        eventDetails={selectedEvent}
+                        closeAddEvent={handleClose}
+                    />
+                </Suspense>
             )}
         </React.Fragment>
     );

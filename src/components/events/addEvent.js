@@ -128,7 +128,6 @@ const AddEvent = (props) => {
                                 list={startTimeList}
                                 label="Start Time"
                                 startTime={event.startTime}
-                                // handleChange={(value) => handleChange(value, 'startTime')}
                                 handleChange={(value) => handleTimeValues(value, 'startTime')}
                             />
                         </div>
@@ -137,7 +136,6 @@ const AddEvent = (props) => {
                                 label="End Time"
                                 list={endTimeList}
                                 endTime={event.endTime}
-                                // handleChange={(value) => handleChange(value, 'endTime')}
                                 handleChange={(value) => handleTimeValues(value, 'endTime')}
                             />
                         </div>

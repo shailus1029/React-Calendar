@@ -1,24 +1,24 @@
 export const daysShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-export const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
+export const monthNamesShort = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
     "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
 ];
 
 export const getCurrentMonth = (date) => {
     const mm = String(date.getMonth() + 1);
     const yyyy = date.getFullYear();
-    return monthNames[mm - 1] + " " + yyyy.toString();
+    return monthNamesShort[mm - 1] + " " + yyyy.toString();
 };
 
 export const getStartOfWeek = (dateArg) => {
