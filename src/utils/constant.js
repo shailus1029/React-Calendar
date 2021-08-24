@@ -59,3 +59,16 @@ export const isMonthSame = (firstDate, secondDate) => {
         firstDate.getMonth() === secondDate.getMonth()
     );
 };
+
+export const fuzzySearch = (str, querySearch) => {
+    let i = 0, n = -1, l;
+    str = str.toLowerCase();
+    querySearch = querySearch.toLowerCase();
+    for (i; i < querySearch.length; i++) {
+        l = querySearch[i++];
+        if (!~(n = str.indexOf(l, n + 1))) {
+            return false;
+        }
+    }
+    return true;
+};

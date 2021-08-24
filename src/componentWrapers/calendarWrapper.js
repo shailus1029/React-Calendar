@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Styles from "../assets/css/calendar.css";
+import SearchEvents from "../components/events/searchEvents";
 import CalendarBody from "../components/calendar/calendarBody";
 import CalendarHeader from "../components/calendar/calendarHeader";
 import CalendarWeekDays from "../components/calendar/calendarWeekDays";
@@ -18,11 +19,14 @@ const CalendarWrapper = () => {
 
     return (
         <div className={Styles.calendarContainer}>
-            <CalendarHeader
-                currentMonth={currentMonth}
-                nextMonth={handleNextMonth}
-                prevMonth={handlePrevMonth}
-            />
+            <div className={Styles.headerContainer}>
+                <CalendarHeader
+                    currentMonth={currentMonth}
+                    nextMonth={handleNextMonth}
+                    prevMonth={handlePrevMonth}
+                />
+                <SearchEvents />
+            </div>
             <CalendarWeekDays />
             <CalendarBody currentMonth={currentMonth} />
         </div>
