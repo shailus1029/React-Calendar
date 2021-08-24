@@ -52,6 +52,7 @@ ul {
 .singleSuggestion {
     text-align: start;
     padding: 5px 3px;
+    font-size: 12px;
 }
 
 .singleSuggestion:hover,

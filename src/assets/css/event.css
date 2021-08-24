@@ -213,6 +213,22 @@
     margin-left: 10px;
 }
 
+.eventDate {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    pointer-events: all !important;
+}
+
+.noteText {
+    font-size: 11px;
+    margin-top: 10px;
+    color: mediumvioletred;
+}
+
 @media screen and (max-width: 400px) {
     .popup1, .eventDetailsPopUp {
         width: 275px;

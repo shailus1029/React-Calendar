@@ -55,6 +55,17 @@ const AddEvent = (props) => {
         props.closeAddEvent();
     };
 
+    const submitBtnDisable = () => {
+        let isDisabled = false;
+        for(const key in event) {
+            if(event[key] == null || event[key] == ''){
+                isDisabled =  true;
+                break;
+            }
+        }
+        return isDisabled;
+    }
+
     const handleCancel = () => {
         props.closeAddEvent();
         setEvent(defaultEventState);
@@ -81,6 +92,9 @@ const AddEvent = (props) => {
                     className={Styles.closeIcon}
                     onClick={props.closeAddEvent}
                 />
+            </div>
+            <div className={`${Styles.eventTiming} ${Styles.eventDate}`}>
+                {new Date(props.date).toDateString()}
             </div>
             <form onSubmit={handleSubmit}>
                 <div className={Styles.eventForm}>
@@ -140,6 +154,7 @@ const AddEvent = (props) => {
                             />
                         </div>
                     </div>
+                    <p className={Styles.noteText}>Note: All fields are mandaotry</p>
                     <div className={Styles.btnContainer}>
                         <button
                             className={Styles.cancelBtn}
@@ -148,7 +163,7 @@ const AddEvent = (props) => {
                         >
                             Cancel
                         </button>
-                        <button className={Styles.submitBtn} type='submit'>
+                        <button className={Styles.submitBtn} disabled={submitBtnDisable()} type='submit'>
                             Submit
                         </button>
                     </div>
