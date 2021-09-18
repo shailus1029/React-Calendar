@@ -257,15 +257,24 @@ button:disabled {
     display: none;
   }
 
+@media screen and (max-width: 768px) {
+    .popup1, .eventDetailsPopUp {
+        width: 300px;
+    }
+}  
+
 @media screen and (max-width: 400px) {
     .popup1, .eventDetailsPopUp {
         width: 275px;
         padding: 15px;
     }
+    .titleWrapper {
+        margin: 0px;
+    }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 320px) {
     .popup1, .eventDetailsPopUp {
-        width: 300px;
+        width: 225px;
     }
 }

@@ -1,86 +1,66 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Styles from "../../assets/css/timerDropDown.css";
 
-class TimeDropdown extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            showList: false,
-            labelItem: props.label,
+const TimeList = (props) => {
+    const [showList, setShowList] = useState(false);
+    const [labelItem, setLabelItem] = useState(props.label);
+    const container = useRef();
+
+    useEffect(() => {
+        document.addEventListener("mousedown", hideTimeList);
+
+        return () => {
+            document.removeEventListener("mousedown", hideTimeList);
         };
-        this.container = React.createRef();
-    }
+    });
 
-    componentDidMount() {
-        document.addEventListener("mousedown", this.hideTimeList);
-    }
-
-    componentWillUnmount() {
-      document.removeEventListener("mousedown", this.hideTimeList);
-    }
-
-    showTimeList = () => {
-        this.setState({ showList: true });
+    const showTimeList = () => {
+        setShowList(true);
     };
 
-    hideTimeList = (event) => {
-        if (
-          this.container.current &&
-          !this.container.current.contains(event.target)
-        ) {
-          this.setState({
-            showList: false,
-          });
-        }
-      };
-
-    handleSelectTime = (value) => {
-        if (this.state.labelItem !== value) {
-            this.setState({
-                labelItem: value,
-                showList: false,
-            });
-            this.props.handleChange(value);
+    const hideTimeList = (event) => {
+        if (container.current && !container.current.contains(event.target)) {
+            setShowList(false);
         }
     };
 
-    renderSingleListItem = (item, index) => {
+    const handleSelectTime = (value) => {
+        if (labelItem !== value) {
+            setShowList(false);
+            setLabelItem(value);
+            props.handleChange(value);
+        }
+    };
+
+    const renderSingleListItem = (item, index) => {
         return (
-            <li
-                key={index}
-                value={item}
-                onClick={() => this.handleSelectTime(item)}
-            >
+            <li key={index} value={item} onClick={() => handleSelectTime(item)}>
                 <a>{item}</a>
             </li>
         );
     };
 
-    render() {
-        const { list } = this.props;
-        return (
-            <div
-                className={`${Styles.dropdown} ${
-                    this.state.showList ? Styles.open : ""
-                }`}
-                ref={this.container}
+    const { list } = props;
+    return (
+        <div
+            className={`${Styles.dropdown} ${showList ? Styles.open : ""}`}
+            ref={container}
+        >
+            <button
+                className={Styles.dropdownToggle}
+                type='button'
+                onClick={showTimeList}
             >
-                <button
-                    className={Styles.dropdownToggle}
-                    type='button'
-                    onClick={this.showTimeList}
-                >
-                    {this.state.labelItem}
-                    <span className={Styles.caret}></span>
-                </button>
-                {this.state.showList ? (
-                    <ul className={Styles.dropdownMenu}>
-                        {list.map(this.renderSingleListItem)}
-                    </ul>
-                ) : null}
-            </div>
-        );
-    }
-}
+                {labelItem}
+                <span className={Styles.caret}></span>
+            </button>
+            {showList ? (
+                <ul className={Styles.dropdownMenu}>
+                    {list.map(renderSingleListItem)}
+                </ul>
+            ) : null}
+        </div>
+    );
+};
 
-export default TimeDropdown;
+export default React.memo(TimeList);
